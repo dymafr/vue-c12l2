@@ -2,14 +2,29 @@
   <div class="container">
     <div class="p-10">
       <h3 class="mb-10">Formulaire</h3>
-      <form>
-        <input class="mr-10" type="text" placeholder="Prénom" />
-        <input class="mr-10" type="text" placeholder="Email" />
+      <form @submit="handleSubmit">
+        <input
+          v-model="nameValue"
+          class="mr-10"
+          type="text"
+          placeholder="Prénom"
+        />
+        <input
+          v-model="emailValue"
+          class="mr-10"
+          type="text"
+          placeholder="Email"
+        />
         <button>Sauvegarder</button>
       </form>
     </div>
     <div class="p-20">
       <h3>Liste des utilisateurs</h3>
+      <ul>
+        <li v-for="user in state.users">
+          <p>{{ user.name }} - {{ user.email }}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -29,7 +44,7 @@ const state = reactive({
   users: [],
 });
 
-const { handleSubmit } = useForm();
+const { handleSubmit, resetForm } = useForm();
 
 const mySubmit = handleSubmit(async (value) => {
   try {
@@ -41,13 +56,15 @@ const mySubmit = handleSubmit(async (value) => {
       },
     });
     const user = await response.json();
+    state.users.push(user);
+    resetForm();
   } catch (err) {
     console.error(err);
   }
 });
 
 const { value: emailValue } = useField('email');
-const { value: name } = useField('name');
+const { value: nameValue } = useField('name');
 </script>
 
 <style lang="scss">
