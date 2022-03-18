@@ -15,7 +15,7 @@
           type="text"
           placeholder="Email"
         />
-        <button>Sauvegarder</button>
+        <button class="btn btn-primary">Sauvegarder</button>
       </form>
     </div>
     <div class="p-20">
@@ -50,7 +50,7 @@ const mySubmit = handleSubmit(async (value) => {
   try {
     const response = await fetch('https://restapi.fr/api/vueuser', {
       method: 'POST',
-      body: JSON.stringify(values),
+      body: JSON.stringify(value),
       headers: {
         'Content-Type': 'application/json',
       },
