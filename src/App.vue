@@ -40,7 +40,7 @@ interface User {
   _id?: string;
 }
 
-const state = reactive({
+const state = reactive<{ users: User[] }>({
   users: [],
 });
 
@@ -55,7 +55,7 @@ const mySubmit = handleSubmit(async (value) => {
         'Content-Type': 'application/json',
       },
     });
-    const user = await response.json();
+    const user: User = await response.json();
     state.users.push(user);
     resetForm();
   } catch (err) {
