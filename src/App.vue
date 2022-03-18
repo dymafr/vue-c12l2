@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="p-10">
+    <div class="p-20">
       <h3 class="mb-10">Formulaire</h3>
-      <form @submit="handleSubmit">
+      <form @submit="mySubmit">
         <input
           v-model="nameValue"
           class="mr-10"
